@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class RolService : IRolService
     {
-        private IRolDAL _rolDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public RolService(IRolDAL rolDAL)
+        public RolService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _rolDAL = rolDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddRol(Rol rol)
         {
-            _rolDAL.Add(rol);
+            _unidadDeTrabajo.RolDAL.Add(rol);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeleteRol(int id)

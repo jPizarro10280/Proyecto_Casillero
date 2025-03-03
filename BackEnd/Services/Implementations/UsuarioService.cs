@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class UsuarioService : IUsuarioService
     {
-        private IUsuarioDAL _usuarioDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public UsuarioService(IUsuarioDAL usuarioDAL)
+        public UsuarioService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _usuarioDAL = usuarioDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddUsuario(Usuario usuario)
         {
-            _usuarioDAL.Add(usuario);
+            _unidadDeTrabajo.UsuarioDAL.Add(usuario);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeleteUsuario(int id)

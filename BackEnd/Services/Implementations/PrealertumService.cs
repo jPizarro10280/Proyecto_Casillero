@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class PrealertumService : IPrealertumService
     {
-        private IPrealertumDAL _prealertumDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public PrealertumService(IPrealertumDAL prealertumDAL)
+        public PrealertumService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _prealertumDAL = prealertumDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddPrealertum(Prealertum prealertum)
         {
-            _prealertumDAL.Add(prealertum);
+            _unidadDeTrabajo.PrealertumDAL.Add(prealertum);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeletePrealertum(int id)

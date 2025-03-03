@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class PrealertaPaqueteService : IPrealertaPaqueteService
     {
-        private IPrealertaPaqueteDAL _prealertaPaqueteDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public PrealertaPaqueteService(IPrealertaPaqueteDAL prealertaPaqueteDAL)
+        public PrealertaPaqueteService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _prealertaPaqueteDAL = prealertaPaqueteDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddPrealertaPaquete(PrealertaPaquete prealertaPaquete)
         {
-            _prealertaPaqueteDAL.Add(prealertaPaquete);
+            _unidadDeTrabajo.PrealertaPaqueteDAL.Add(prealertaPaquete);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeletePrealertaPaquete(int id)

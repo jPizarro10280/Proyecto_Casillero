@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class DireccionService : IDireccionService
     {
-        private IDireccionDAL _direccionDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public DireccionService(IDireccionDAL direccionDAL)
+        public DireccionService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _direccionDAL = direccionDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddDireccion(Direccion direccion)
         {
-            _direccionDAL.Add(direccion);
+            _unidadDeTrabajo.DireccionDAL.Add(direccion);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeleteDireccion(int id)

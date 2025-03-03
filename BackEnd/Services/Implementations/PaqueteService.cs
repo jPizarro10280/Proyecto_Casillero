@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class PaqueteService : IPaqueteService
     {
-        private IPaqueteDAL _paqueteDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public PaqueteService(IPaqueteDAL paqueteDAL)
+        public PaqueteService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _paqueteDAL = paqueteDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddPaquete(Paquete paquete)
         {
-            _paqueteDAL.Add(paquete);
+            _unidadDeTrabajo.PaqueteDAL.Add(paquete);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeletePaquete(int id)

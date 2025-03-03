@@ -6,16 +6,17 @@ namespace BackEnd.Services.Implementations
 {
     public class FacturaService : IFacturaService
     {
-        private IFacturaDAL _facturaDAL;
+        private IUnidadDeTrabajo _unidadDeTrabajo;
 
-        public FacturaService(IFacturaDAL facturaDAL)
+        public FacturaService(IUnidadDeTrabajo unidadDeTrabajo)
         {
-            _facturaDAL = facturaDAL;
+            _unidadDeTrabajo = unidadDeTrabajo;
         }
 
         public void AddFactura(Factura factura)
         {
-            _facturaDAL.Add(factura);
+            _unidadDeTrabajo.FacturaDAL.Add(factura);
+            _unidadDeTrabajo.Complete();
         }
 
         public void DeleteFactura(int id)

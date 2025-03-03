@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 #region DI
 builder.Services.AddDbContext<CasilleroProyectoContext>();
 
+builder.Services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
+
 builder.Services.AddScoped<IDetalleFacturaService, DetalleFacturaService>();
 builder.Services.AddScoped<IDetalleFacturaDAL, DetalleFacturaDAL>();
 
