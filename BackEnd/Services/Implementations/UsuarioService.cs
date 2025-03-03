@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,17 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddUsuario(Usuario usuario)
+        public void AddUsuario(UsuarioDTO usuario)
         {
-            _unidadDeTrabajo.UsuarioDAL.Add(usuario);
+            var usuarioEntity = new Usuario()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Correo = usuario.Correo,
+                Contrasena = usuario.Contrasena,
+                Telefono = usuario.Telefono
+            };
+            _unidadDeTrabajo.UsuarioDAL.Add(usuarioEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +38,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdateUsuario(Usuario usuario)
+        public void UpdateUsuario(UsuarioDTO usuario)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,14 +32,14 @@ namespace BackEnd.Controllers
 
         // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody]Usuario usuario)
+        public void Post([FromBody]UsuarioDTO usuario)
         {
             _usuarioService.AddUsuario(usuario);
         }
 
         // PUT api/<UsuarioController>/5
         [HttpPut]
-        public void Put( [FromBody] Usuario usuario)
+        public void Put( [FromBody] UsuarioDTO usuario)
         {
             _usuarioService.AddUsuario(usuario);
         }

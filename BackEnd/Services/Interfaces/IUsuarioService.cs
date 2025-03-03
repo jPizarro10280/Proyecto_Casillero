@@ -1,11 +1,12 @@
-﻿using Entities.Entities;
+﻿using BackEnd.DTO;
+using Entities.Entities;
 
 namespace BackEnd.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        void AddUsuario(Usuario usuario);
-        void UpdateUsuario(Usuario usuario);
+        void AddUsuario(UsuarioDTO usuario);
+        void UpdateUsuario(UsuarioDTO usuario);
         void DeleteUsuario(int id);
         List<Usuario> GetUsuarios();
     }
