@@ -8,42 +8,42 @@ namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class PrealertumController : ControllerBase
     {
-        IUsuarioService _usuarioService;
-        public UsuarioController(IUsuarioService usuarioService)
+        IPrealertumService _prealertumService;
+        public PrealertumController(IPrealertumService prealertumService)
         {
-            _usuarioService = usuarioService;
+            _prealertumService = prealertumService;
         }
-        // GET: api/<UsuarioController>
-        [HttpGet]
+
+            // GET: api/<PrealertumController>
+            [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<UsuarioController>/5
+        // GET api/<PrealertumController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<UsuarioController>
+        // POST api/<PrealertumController>
         [HttpPost]
-        public void Post([FromBody]Usuario usuario)
+        public void Post([FromBody]Prealertum prealertum)
         {
-            _usuarioService.AddUsuario(usuario);
+            _prealertumService.AddPrealertum(prealertum);
         }
 
-        // PUT api/<UsuarioController>/5
-        [HttpPut]
-        public void Put( [FromBody] Usuario usuario)
+        // PUT api/<PrealertumController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]string value)
         {
-            _usuarioService.AddUsuario(usuario);
         }
 
-        // DELETE api/<UsuarioController>/5
+        // DELETE api/<PrealertumController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
