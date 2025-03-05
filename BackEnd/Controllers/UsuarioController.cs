@@ -18,16 +18,16 @@ namespace BackEnd.Controllers
         }
         // GET: api/<UsuarioController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<UsuarioDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _usuarioService.GetUsuarios();
         }
 
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public UsuarioDTO Get(int id)
         {
-            return "value";
+            return _usuarioService.GetUsuarioByID(id);
         }
 
         // POST api/<UsuarioController>
@@ -41,13 +41,14 @@ namespace BackEnd.Controllers
         [HttpPut]
         public void Put( [FromBody] UsuarioDTO usuario)
         {
-            _usuarioService.AddUsuario(usuario);
+            _usuarioService.UpdateUsuario(usuario);
         }
 
         // DELETE api/<UsuarioController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _usuarioService.DeleteUsuario(id);
         }
     }
 }

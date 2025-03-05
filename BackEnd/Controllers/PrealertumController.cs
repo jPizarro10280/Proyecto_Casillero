@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,42 +12,46 @@ namespace BackEnd.Controllers
     public class PrealertumController : ControllerBase
     {
         IPrealertumService _prealertumService;
+
         public PrealertumController(IPrealertumService prealertumService)
         {
             _prealertumService = prealertumService;
         }
 
-            // GET: api/<PrealertumController>
-            [HttpGet]
-        public IEnumerable<string> Get()
+        // GET: api/<PrealertumController>
+        [HttpGet]
+        public IEnumerable<PrealertumDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _prealertumService.GetPrealertums();
         }
 
         // GET api/<PrealertumController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public PrealertumDTO Get(int id)
         {
-            return "value";
+            return _prealertumService.GetPrealertumByID(id);
         }
 
         // POST api/<PrealertumController>
         [HttpPost]
-        public void Post([FromBody]Prealertum prealertum)
+        public void Post([FromBody] PrealertumDTO prealertum)
         {
             _prealertumService.AddPrealertum(prealertum);
         }
 
         // PUT api/<PrealertumController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public void Put([FromBody] PrealertumDTO prealertum)
         {
+            _prealertumService.UpdatePrealertum(prealertum);
         }
 
         // DELETE api/<PrealertumController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _prealertumService.DeletePrealertum(id);
         }
     }
+
 }
