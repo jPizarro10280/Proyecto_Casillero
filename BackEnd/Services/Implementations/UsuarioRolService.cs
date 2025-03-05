@@ -44,9 +44,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.UsuarioRolDAL.Remove(usuarioRol);
         }
 
-        public List<UsuarioRol> GetUsuarioRoles()
+        public List<UsuarioRolDTO> GetUsuarioRoles()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.UsuarioRolDAL.GetAll();
+            List<UsuarioRolDTO> usuariosRol = new List<UsuarioRolDTO>();
+            foreach (var item in result)
+            {
+                usuariosRol.Add(Convertir(item));
+            }
+            return usuariosRol;
         }
 
 
@@ -55,6 +61,12 @@ namespace BackEnd.Services.Implementations
             var usuarioRolEntity = Convertir(usuarioRol);
             _unidadDeTrabajo.UsuarioRolDAL.Update(usuarioRolEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public UsuarioRolDTO GetUsuarioRolByID(int id)
+        {
+            var result = _unidadDeTrabajo.UsuarioRolDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

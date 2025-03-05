@@ -48,9 +48,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.PaqueteDAL.Remove(paquete);
         }
 
-        public List<Paquete> GetPaquetes()
+        public List<PaqueteDTO> GetPaquetes()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.PaqueteDAL.GetAll();
+            List<PaqueteDTO> paquetes = new List<PaqueteDTO>();
+            foreach (var item in result)
+            {
+                paquetes.Add(Convertir(item));
+            }
+            return paquetes;
         }
 
         public void UpdatePaquete(PaqueteDTO paquete)
@@ -58,6 +64,12 @@ namespace BackEnd.Services.Implementations
             var paqueteEntity = Convertir(paquete);
             _unidadDeTrabajo.PaqueteDAL.Update(paqueteEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public PaqueteDTO GetPaqueteByID(int id)
+        {
+            var result = _unidadDeTrabajo.PaqueteDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

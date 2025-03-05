@@ -55,9 +55,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.DireccionDAL.Remove(direccion);
         }
 
-        public List<Direccion> GetDirecciones()
+        public List<DireccionDTO> GetDirecciones()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.DireccionDAL.GetAll();
+            List<DireccionDTO> direcciones = new List<DireccionDTO>();
+            foreach (var item in result)
+            {
+                direcciones.Add(Convertir(item));
+            }
+            return direcciones;
         }
 
         public void UpdateDireccion(DireccionDTO direccion)
@@ -65,6 +71,12 @@ namespace BackEnd.Services.Implementations
             var direccionEntity = Convertir(direccion);
             _unidadDeTrabajo.DireccionDAL.Update(direccionEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public DireccionDTO GetDireccionByID(int id)
+        {
+            var result = _unidadDeTrabajo.DireccionDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

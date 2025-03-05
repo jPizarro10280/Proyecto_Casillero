@@ -52,9 +52,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.FacturaDAL.Remove(factura);
         }
 
-        public List<Factura> GetFacturas()
+        public List<FacturaDTO> GetFacturas()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.FacturaDAL.GetAll();
+            List<FacturaDTO> facturas = new List<FacturaDTO>();
+            foreach (var item in result)
+            {
+                facturas.Add(Convertir(item));
+            }
+            return facturas;
         }
 
         public void UpdateFactura(FacturaDTO factura)
@@ -62,6 +68,12 @@ namespace BackEnd.Services.Implementations
             var facturaEntity = Convertir(factura);
             _unidadDeTrabajo.FacturaDAL.Update(facturaEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public FacturaDTO GetFacturaByID(int id)
+        {
+            var result = _unidadDeTrabajo.FacturaDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

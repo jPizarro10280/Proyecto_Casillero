@@ -42,9 +42,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.RolDAL.Remove(rol);
         }
 
-        public List<Rol> GetRoles()
+        public List<RolDTO> GetRoles()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.RolDAL.GetAll();
+            List<RolDTO> roles = new List<RolDTO>();
+            foreach (var item in result)
+            {
+                roles.Add(Convertir(item));
+            }
+            return roles;
         }
 
         public void UpdateRol(RolDTO rol)
@@ -52,6 +58,12 @@ namespace BackEnd.Services.Implementations
             var rolEntity = Convertir(rol);
             _unidadDeTrabajo.RolDAL.Update(rolEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public RolDTO GetRolByID(int id)
+        {
+            var result = _unidadDeTrabajo.RolDAL.Get(id);
+            return Convertir(result);
         }
     }
 

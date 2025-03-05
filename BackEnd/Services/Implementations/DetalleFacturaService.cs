@@ -51,9 +51,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.DetalleFacturaDAL.Remove(detalleFactura);
         }
 
-        public List<DetalleFactura> GetDetalleFacturas()
+        public List<DetalleFacturaDTO> GetDetalleFacturas()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.DetalleFacturaDAL.GetAll();
+            List<DetalleFacturaDTO> detalleFacturas = new List<DetalleFacturaDTO>();
+            foreach(var item in result)
+            {
+                detalleFacturas.Add(Convertir(item));
+            }
+            return detalleFacturas;
         }
 
         public void UpdateDetalleFactura(DetalleFacturaDTO detalleFactura)
@@ -61,6 +67,12 @@ namespace BackEnd.Services.Implementations
             var detalleFacturaEntity = Convertir(detalleFactura);
             _unidadDeTrabajo.DetalleFacturaDAL.Update(detalleFacturaEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public DetalleFacturaDTO GetDetalleFacturaByID(int id)
+        {
+            var result = _unidadDeTrabajo.DetalleFacturaDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

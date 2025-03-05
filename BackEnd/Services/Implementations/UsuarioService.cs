@@ -50,9 +50,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.UsuarioDAL.Remove(usuario);
         }
 
-        public List<Usuario> GetUsuarios()
+        public List<UsuarioDTO> GetUsuarios()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.UsuarioDAL.GetAll();
+            List<UsuarioDTO> usuarios = new List<UsuarioDTO>();
+            foreach (var item in result)
+            {
+                usuarios.Add(Convertir(item));
+            }
+            return usuarios;
         }
 
         public void UpdateUsuario(UsuarioDTO usuario)
@@ -60,6 +66,12 @@ namespace BackEnd.Services.Implementations
             var usuarioEntity = Convertir(usuario);
             _unidadDeTrabajo.UsuarioDAL.Update(usuarioEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public UsuarioDTO GetUsuarioByID(int id)
+        {
+            var result = _unidadDeTrabajo.UsuarioDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

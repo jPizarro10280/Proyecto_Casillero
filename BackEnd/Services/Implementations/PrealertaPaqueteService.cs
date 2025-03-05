@@ -44,9 +44,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.PrealertaPaqueteDAL.Remove(prealertaPaquete);
         }
 
-        public List<PrealertaPaquete> GetPrealertaPaquetes()
+        public List<PrealertaPaqueteDTO> GetPrealertaPaquetes()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.PrealertaPaqueteDAL.GetAll();
+            List<PrealertaPaqueteDTO> prealertaPaquetes = new List<PrealertaPaqueteDTO>();
+            foreach (var item in result)
+            {
+                prealertaPaquetes.Add(Convertir(item));
+            }
+            return prealertaPaquetes;
         }
 
         public void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
@@ -54,6 +60,12 @@ namespace BackEnd.Services.Implementations
             var prealertaPaqueteEntity = Convertir(prealertaPaquete);
             _unidadDeTrabajo.PrealertaPaqueteDAL.Update(prealertaPaqueteEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public PrealertaPaqueteDTO GetPrealertaPaqueteByID(int id)
+        {
+            var result = _unidadDeTrabajo.PrealertaPaqueteDAL.Get(id);
+            return Convertir(result);
         }
     }
 }

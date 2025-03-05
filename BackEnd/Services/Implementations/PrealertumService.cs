@@ -54,9 +54,15 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo.PrealertumDAL.Remove(prealertum);
         }
 
-        public List<Prealertum> GetPrealerta()
+        public List<PrealertumDTO> GetPrealertums()
         {
-            throw new NotImplementedException();
+            var result = _unidadDeTrabajo.PrealertumDAL.GetAll();
+            List<PrealertumDTO> prealertums = new List<PrealertumDTO>();
+            foreach (var item in result)
+            {
+                prealertums.Add(Convertir(item));
+            }
+            return prealertums;
         }
 
         public void UpdatePrealertum(PrealertumDTO prealertum)
@@ -64,6 +70,12 @@ namespace BackEnd.Services.Implementations
             var prealertumEntity = Convertir(prealertum);
             _unidadDeTrabajo.PrealertumDAL.Update(prealertumEntity);
             _unidadDeTrabajo.Complete();
+        }
+
+        public PrealertumDTO GetPrealertumByID(int id)
+        {
+            var result = _unidadDeTrabajo.PrealertumDAL.Get(id);
+            return Convertir(result);
         }
     }
 
