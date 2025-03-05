@@ -26,6 +26,18 @@ namespace BackEnd.Services.Implementations
                 Estado = factura.Estado
             };
         }
+        FacturaDTO Convertir(Factura factura)
+        {
+            return new FacturaDTO()
+            {
+                UsuarioId = factura.UsuarioId,
+                PaqueteId = factura.PaqueteId,
+                FechaEmision = factura.FechaEmision,
+                MontoTotal = factura.MontoTotal,
+                Impuestos = factura.Impuestos,
+                Estado = factura.Estado
+            };
+        }
 
         public void AddFactura(FacturaDTO factura)
         {

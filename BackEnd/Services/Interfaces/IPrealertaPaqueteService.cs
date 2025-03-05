@@ -9,5 +9,6 @@ namespace BackEnd.Services.Interfaces
         void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete);
         void DeletePrealertaPaquete(int id);
         List<PrealertaPaqueteDTO> GetPrealertaPaquetes();
+        PrealertaPaqueteDTO GetPrealertaPaqueteByID(int id);
     }
 }

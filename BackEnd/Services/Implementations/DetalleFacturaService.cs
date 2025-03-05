@@ -26,6 +26,18 @@ namespace BackEnd.Services.Implementations
             };
         }
 
+        DetalleFacturaDTO Convertir(DetalleFactura detalleFactura)
+        {
+            return new DetalleFacturaDTO()
+            {
+                FacturaId = detalleFactura.FacturaId,
+                Concepto = detalleFactura.Concepto,
+                Cantidad = detalleFactura.Cantidad,
+                PrecioUnitario = detalleFactura.PrecioUnitario,
+                Subtotal = detalleFactura.Subtotal
+            };
+        }
+
         public void AddDetalleFactura(DetalleFacturaDTO detalleFactura)
         {
             var detalleFacturaEntity = Convertir(detalleFactura);

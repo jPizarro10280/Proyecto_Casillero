@@ -25,6 +25,17 @@ namespace BackEnd.Services.Implementations
                 Telefono = usuario.Telefono
             };
         }
+        UsuarioDTO Convertir(Usuario usuario)
+        {
+            return new UsuarioDTO()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Correo = usuario.Correo,
+                Contrasena = usuario.Contrasena,
+                Telefono = usuario.Telefono
+            };
+        }
 
         public void AddUsuario(UsuarioDTO usuario)
         {

@@ -10,5 +10,6 @@ namespace BackEnd.Services.Interfaces
         public void UpdateDireccion(DireccionDTO direccion);
         public void DeleteDireccion(int id);
         public List<DireccionDTO> GetDirecciones();
+        DireccionDTO GetDireccionByID(int id);
     }
 }

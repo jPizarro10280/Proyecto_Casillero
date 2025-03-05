@@ -22,6 +22,14 @@ namespace BackEnd.Services.Implementations
                 PaqueteId = prealertaPaquete.PaqueteId
             };
         }
+        PrealertaPaqueteDTO Convertir(PrealertaPaquete prealertaPaquete)
+        {
+            return new PrealertaPaqueteDTO()
+            {
+                PrealertaId = prealertaPaquete.PrealertaId,
+                PaqueteId = prealertaPaquete.PaqueteId
+            };
+        }
 
         public void AddPrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
         {

@@ -22,6 +22,14 @@ namespace BackEnd.Services.Implementations
                 UsuarioId = usuarioRol.UsuarioId
             };
         }
+        UsuarioRolDTO Convertir(UsuarioRol usuarioRol)
+        {
+            return new UsuarioRolDTO()
+            {
+                RolId = usuarioRol.RolId,
+                UsuarioId = usuarioRol.UsuarioId
+            };
+        }
 
         public void AddUsuarioRol(UsuarioRolDTO usuarioRol)
         {

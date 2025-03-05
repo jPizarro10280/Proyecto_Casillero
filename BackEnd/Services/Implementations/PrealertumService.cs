@@ -27,6 +27,19 @@ namespace BackEnd.Services.Implementations
                 FechaActualizacion = prealertum.FechaActualizacion
             };
         }
+        PrealertumDTO Convertir(Prealertum prealertum)
+        {
+            return new PrealertumDTO()
+            {
+                UsuarioId = prealertum.UsuarioId,
+                NumeroSeguimiento = prealertum.NumeroSeguimiento,
+                Descripcion = prealertum.Descripcion,
+                Peso = prealertum.Peso,
+                Estado = prealertum.Estado,
+                FechaCreacion = prealertum.FechaCreacion,
+                FechaActualizacion = prealertum.FechaActualizacion
+            };
+        }
 
         public void AddPrealertum(PrealertumDTO prealertum)
         {

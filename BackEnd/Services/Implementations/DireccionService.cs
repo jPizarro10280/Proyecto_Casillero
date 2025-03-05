@@ -28,6 +28,19 @@ namespace BackEnd.Services.Implementations
                 Pais = direccion.Pais
             };
         }
+        DireccionDTO Convertir(Direccion direccion)
+        {
+            return new DireccionDTO()
+            {
+                UsuarioId = direccion.UsuarioId,
+                Linea1 = direccion.Linea1,
+                Linea2 = direccion.Linea2,
+                Ciudad = direccion.Ciudad,
+                Estado = direccion.Estado,
+                CodigoPostal = direccion.CodigoPostal,
+                Pais = direccion.Pais
+            };
+        }
 
         public void AddDireccion(DireccionDTO direccion)
         {

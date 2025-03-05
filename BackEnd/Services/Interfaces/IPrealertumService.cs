@@ -9,5 +9,6 @@ namespace BackEnd.Services.Interfaces
         void UpdatePrealertum(PrealertumDTO prealertum);
         void DeletePrealertum(int id);
         List<PrealertumDTO> GetPrealerta();
+        PrealertumDTO GetPrealertumByID(int id);
     }
 }

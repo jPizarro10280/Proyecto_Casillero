@@ -21,6 +21,13 @@ namespace BackEnd.Services.Implementations
                 Nombre = rol.Nombre
             };
         }
+        RolDTO Convertir(Rol rol)
+        {
+            return new RolDTO()
+            {
+                Nombre = rol.Nombre
+            };
+        }
 
         public void AddRol(RolDTO rol)
         {

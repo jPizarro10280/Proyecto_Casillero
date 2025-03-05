@@ -9,5 +9,6 @@ namespace BackEnd.Services.Interfaces
         void UpdateFactura(FacturaDTO factura);
         void DeleteFactura(int id);
         List<FacturaDTO> GetFacturas();
+        FacturaDTO GetFacturaByID(int id);
     }
 }

@@ -24,6 +24,16 @@ namespace BackEnd.Services.Implementations
                 MontoTotal = paquete.MontoTotal
             };
         }
+        PaqueteDTO Convertir(Paquete paquete)
+        {
+            return new PaqueteDTO()
+            {
+                UsuarioId = paquete.UsuarioId,
+                FechaCreacion = paquete.FechaCreacion,
+                Estado = paquete.Estado,
+                MontoTotal = paquete.MontoTotal
+            };
+        }
 
         public void AddPaquete(PaqueteDTO paquete)
         {

@@ -9,5 +9,6 @@ namespace BackEnd.Services.Interfaces
         void UpdateUsuario(UsuarioDTO usuario);
         void DeleteUsuario(int id);
         List<UsuarioDTO> GetUsuarios();
+        UsuarioDTO GetUsuarioByID(int id);
     }
 }
