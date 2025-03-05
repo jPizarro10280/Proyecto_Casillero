@@ -15,6 +15,16 @@ namespace BackEnd.Services.Implementations
 
         public void AddPrealertum(Prealertum prealertum)
         {
+            var prealertumEntity = new Prealertum()
+            {
+                UsuarioId = prealertum.UsuarioId,
+                NumeroSeguimiento = prealertum.NumeroSeguimiento,
+                Descripcion = prealertum.Descripcion,
+                Peso = prealertum.Peso,
+                Estado = prealertum.Estado,
+                FechaCreacion = prealertum.FechaCreacion,
+                FechaActualizacion = prealertum.FechaActualizacion
+            };
             _unidadDeTrabajo.PrealertumDAL.Add(prealertum);
             _unidadDeTrabajo.Complete();
         }
@@ -29,7 +39,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdatePrealertum(Prealertum prealertum)
+        public void UpdatePrealertum(PrealertumDTO prealertum)
         {
             throw new NotImplementedException();
         }

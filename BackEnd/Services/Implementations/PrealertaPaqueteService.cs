@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,14 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddPrealertaPaquete(PrealertaPaquete prealertaPaquete)
+        public void AddPrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
         {
-            _unidadDeTrabajo.PrealertaPaqueteDAL.Add(prealertaPaquete);
+            var prealertaPaqueteEntity = new PrealertaPaquete()
+            {
+                PrealertaId=prealertaPaquete.PrealertaId,
+                PaqueteId=prealertaPaquete.PaqueteId
+            };
+            _unidadDeTrabajo.PrealertaPaqueteDAL.Add(prealertaPaqueteEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +35,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdatePrealertaPaquete(PrealertaPaquete prealertaPaquete)
+        public void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
         {
             throw new NotImplementedException();
         }

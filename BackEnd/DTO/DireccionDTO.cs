@@ -3,7 +3,6 @@
     public class DireccionDTO
     {
         public int UsuarioId { get; set; }
-        public string UsuarioNombre { get; set; }
 
         public string Linea1 { get; set; } = null!;
 

@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,17 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddDetalleFactura(DetalleFactura detalleFactura)
+        public void AddDetalleFactura(DetalleFacturaDTO detalleFactura)
         {
-            _unidadDeTrabajo.DetalleFacturaDAL.Add(detalleFactura);
+            var detalleFacturaEntity = new DetalleFactura()
+            {
+                FacturaId = detalleFactura.FacturaId,
+                Concepto = detalleFactura.Concepto,
+                Cantidad = detalleFactura.Cantidad,
+                PrecioUnitario = detalleFactura.PrecioUnitario,
+                Subtotal = detalleFactura.Subtotal
+            };
+            _unidadDeTrabajo.DetalleFacturaDAL.Add(detalleFacturaEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +38,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdateDetalleFactura(DetalleFactura detalleFactura)
+        public void UpdateDetalleFactura(DetalleFacturaDTO detalleFactura)
         {
             throw new NotImplementedException();
         }

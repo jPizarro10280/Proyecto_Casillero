@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,16 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddPaquete(Paquete paquete)
+        public void AddPaquete(PaqueteDTO paquete)
         {
-            _unidadDeTrabajo.PaqueteDAL.Add(paquete);
+            var paqueteEntity = new Paquete() 
+            {
+                UsuarioId=paquete.UsuarioId,
+                FechaCreacion=paquete.FechaCreacion,
+                Estado=paquete.Estado,
+                MontoTotal=paquete.MontoTotal
+            };
+            _unidadDeTrabajo.PaqueteDAL.Add(paqueteEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +37,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdatePaquete(Paquete paquete)
+        public void UpdatePaquete(PaqueteDTO paquete)
         {
             throw new NotImplementedException();
         }

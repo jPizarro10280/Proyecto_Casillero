@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,18 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddFactura(Factura factura)
+        public void AddFactura(FacturaDTO factura)
         {
-            _unidadDeTrabajo.FacturaDAL.Add(factura);
+            var facturaEntity = new Factura()
+            {
+                UsuarioId = factura.UsuarioId,
+                PaqueteId = factura.PaqueteId,
+                FechaEmision = factura.FechaEmision,
+                MontoTotal = factura.MontoTotal,
+                Impuestos = factura.Impuestos,
+                Estado = factura.Estado
+            };
+            _unidadDeTrabajo.FacturaDAL.Add(facturaEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +39,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdateFactura(Factura factura)
+        public void UpdateFactura(FacturaDTO factura)
         {
             throw new NotImplementedException();
         }

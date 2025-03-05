@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,13 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddRol(Rol rol)
+        public void AddRol(RolDTO rol)
         {
-            _unidadDeTrabajo.RolDAL.Add(rol);
+            var rolEntity = new Rol() 
+            {
+                Nombre = rol.Nombre
+            };
+            _unidadDeTrabajo.RolDAL.Add(rolEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +34,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdateRol(Rol rol)
+        public void UpdateRol(RolDTO rol)
         {
             throw new NotImplementedException();
         }

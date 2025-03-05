@@ -1,12 +1,13 @@
-﻿using DAL.Implementations;
+﻿using BackEnd.DTO;
+using DAL.Implementations;
 using Entities.Entities;
 
 namespace BackEnd.Services.Interfaces
 {
     public interface IDireccionService
     {
-        public void AddDireccion(Direccion direccion);
-        public void UpdateDireccion(Direccion direccion);
+        public void AddDireccion(DireccionDTO direccion);
+        public void UpdateDireccion(DireccionDTO direccion);
         public void DeleteDireccion(int id);
         public List<Direccion> GetDirecciones();
     }

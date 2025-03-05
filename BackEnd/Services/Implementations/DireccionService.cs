@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,19 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddDireccion(Direccion direccion)
+        public void AddDireccion(DireccionDTO direccion)
         {
-            _unidadDeTrabajo.DireccionDAL.Add(direccion);
+            var direccionEntity = new Direccion()
+            {
+                UsuarioId = direccion.UsuarioId,
+                Linea1 = direccion.Linea1,
+                Linea2 = direccion.Linea2,
+                Ciudad = direccion.Ciudad,
+                Estado = direccion.Estado,
+                CodigoPostal = direccion.CodigoPostal,
+                Pais = direccion.Pais
+            };
+            _unidadDeTrabajo.DireccionDAL.Add(direccionEntity);
             _unidadDeTrabajo.Complete();
         }
 
@@ -29,7 +40,7 @@ namespace BackEnd.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public void UpdateDireccion(Direccion direccion)
+        public void UpdateDireccion(DireccionDTO direccion)
         {
             throw new NotImplementedException();
         }

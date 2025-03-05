@@ -1,11 +1,12 @@
-﻿using Entities.Entities;
+﻿using BackEnd.DTO;
+using Entities.Entities;
 
 namespace BackEnd.Services.Interfaces
 {
     public interface IRolService
     {
-        void AddRol(Rol rol);
-        void UpdateRol(Rol rol);
+        void AddRol(RolDTO rol);
+        void UpdateRol(RolDTO rol);
         void DeleteRol(int id);
         List<Rol> GetRoles();
     }

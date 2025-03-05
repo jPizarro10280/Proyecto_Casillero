@@ -1,11 +1,12 @@
-﻿using Entities.Entities;
+﻿using BackEnd.DTO;
+using Entities.Entities;
 
 namespace BackEnd.Services.Interfaces
 {
     public interface IPrealertaPaqueteService
     {
-        void AddPrealertaPaquete(PrealertaPaquete prealertaPaquete);
-        void UpdatePrealertaPaquete(PrealertaPaquete prealertaPaquete);
+        void AddPrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete);
+        void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete);
         void DeletePrealertaPaquete(int id);
         List<PrealertaPaquete> GetPrealertaPaquetes();
     }
