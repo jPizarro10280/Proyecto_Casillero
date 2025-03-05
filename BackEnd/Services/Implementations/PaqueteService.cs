@@ -14,22 +14,28 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
+        Paquete Convertir(PaqueteDTO paquete)
+        {
+            return new Paquete()
+            {
+                UsuarioId = paquete.UsuarioId,
+                FechaCreacion = paquete.FechaCreacion,
+                Estado = paquete.Estado,
+                MontoTotal = paquete.MontoTotal
+            };
+        }
+
         public void AddPaquete(PaqueteDTO paquete)
         {
-            var paqueteEntity = new Paquete() 
-            {
-                UsuarioId=paquete.UsuarioId,
-                FechaCreacion=paquete.FechaCreacion,
-                Estado=paquete.Estado,
-                MontoTotal=paquete.MontoTotal
-            };
+            var paqueteEntity = Convertir(paquete);            
             _unidadDeTrabajo.PaqueteDAL.Add(paqueteEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeletePaquete(int id)
         {
-            throw new NotImplementedException();
+            var paquete = new Paquete { Id = id };
+            _unidadDeTrabajo.PaqueteDAL.Remove(paquete);
         }
 
         public List<Paquete> GetPaquetes()
@@ -39,7 +45,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdatePaquete(PaqueteDTO paquete)
         {
-            throw new NotImplementedException();
+            var paqueteEntity = Convertir(paquete);
+            _unidadDeTrabajo.PaqueteDAL.Update(paqueteEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }

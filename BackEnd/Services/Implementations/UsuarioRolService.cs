@@ -14,21 +14,26 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddUsuarioRol(UsuarioRolDTO usuarioRol)
+        UsuarioRol Convertir(UsuarioRolDTO usuarioRol)
         {
-            var usuarioRolEntity = new UsuarioRol()
+            return new UsuarioRol()
             {
                 RolId = usuarioRol.RolId,
                 UsuarioId = usuarioRol.UsuarioId
             };
-        
+        }
+
+        public void AddUsuarioRol(UsuarioRolDTO usuarioRol)
+        {
+            var usuarioRolEntity = Convertir(usuarioRol);       
             _unidadDeTrabajo.UsuarioRolDAL.Add(usuarioRolEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeleteUsuarioRol(int id)
         {
-            throw new NotImplementedException();
+            var usuarioRol = new UsuarioRol { Id = id };
+            _unidadDeTrabajo.UsuarioRolDAL.Remove(usuarioRol);
         }
 
         public List<UsuarioRol> GetUsuarioRoles()
@@ -39,7 +44,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdateUsuarioRol(UsuarioRolDTO usuarioRol)
         {
-            throw new NotImplementedException();
+            var usuarioRolEntity = Convertir(usuarioRol);
+            _unidadDeTrabajo.UsuarioRolDAL.Update(usuarioRolEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }

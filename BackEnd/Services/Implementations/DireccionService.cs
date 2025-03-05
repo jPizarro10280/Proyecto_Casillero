@@ -1,5 +1,6 @@
 ﻿using BackEnd.DTO;
 using BackEnd.Services.Interfaces;
+using DAL.Implementations;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -14,9 +15,9 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddDireccion(DireccionDTO direccion)
+        Direccion Convertir(DireccionDTO direccion)
         {
-            var direccionEntity = new Direccion()
+            return new Direccion()
             {
                 UsuarioId = direccion.UsuarioId,
                 Linea1 = direccion.Linea1,
@@ -26,13 +27,19 @@ namespace BackEnd.Services.Implementations
                 CodigoPostal = direccion.CodigoPostal,
                 Pais = direccion.Pais
             };
+        }
+
+        public void AddDireccion(DireccionDTO direccion)
+        {
+            var direccionEntity = Convertir(direccion);
             _unidadDeTrabajo.DireccionDAL.Add(direccionEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeleteDireccion(int id)
         {
-            throw new NotImplementedException();
+            var direccion = new Direccion { Id = id };
+            _unidadDeTrabajo.DireccionDAL.Remove(direccion);
         }
 
         public List<Direccion> GetDirecciones()
@@ -42,7 +49,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdateDireccion(DireccionDTO direccion)
         {
-            throw new NotImplementedException();
+            var direccionEntity = Convertir(direccion);
+            _unidadDeTrabajo.DireccionDAL.Update(direccionEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }

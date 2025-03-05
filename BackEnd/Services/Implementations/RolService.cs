@@ -14,19 +14,25 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddRol(RolDTO rol)
+        Rol Convertir(RolDTO rol)
         {
-            var rolEntity = new Rol() 
+            return new Rol()
             {
                 Nombre = rol.Nombre
             };
+        }
+
+        public void AddRol(RolDTO rol)
+        {
+            var rolEntity = Convertir(rol);            
             _unidadDeTrabajo.RolDAL.Add(rolEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeleteRol(int id)
         {
-            throw new NotImplementedException();
+            var rol = new Rol { Id = id };
+            _unidadDeTrabajo.RolDAL.Remove(rol);
         }
 
         public List<Rol> GetRoles()
@@ -36,7 +42,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdateRol(RolDTO rol)
         {
-            throw new NotImplementedException();
+            var rolEntity = Convertir(rol);
+            _unidadDeTrabajo.RolDAL.Update(rolEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using BackEnd.Services.Interfaces;
+﻿using BackEnd.DTO;
+using BackEnd.Services.Interfaces;
 using DAL.Interfaces;
 using Entities.Entities;
 
@@ -13,9 +14,9 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddPrealertum(Prealertum prealertum)
+        Prealertum Convertir(PrealertumDTO prealertum)
         {
-            var prealertumEntity = new Prealertum()
+            return new Prealertum()
             {
                 UsuarioId = prealertum.UsuarioId,
                 NumeroSeguimiento = prealertum.NumeroSeguimiento,
@@ -25,13 +26,19 @@ namespace BackEnd.Services.Implementations
                 FechaCreacion = prealertum.FechaCreacion,
                 FechaActualizacion = prealertum.FechaActualizacion
             };
-            _unidadDeTrabajo.PrealertumDAL.Add(prealertum);
+        }
+
+        public void AddPrealertum(PrealertumDTO prealertum)
+        {
+            var prealertumEntity = Convertir(prealertum);            
+            _unidadDeTrabajo.PrealertumDAL.Add(prealertumEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeletePrealertum(int id)
         {
-            throw new NotImplementedException();
+            var prealertum = new Prealertum { Id = id };
+            _unidadDeTrabajo.PrealertumDAL.Remove(prealertum);
         }
 
         public List<Prealertum> GetPrealerta()
@@ -41,7 +48,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdatePrealertum(PrealertumDTO prealertum)
         {
-            throw new NotImplementedException();
+            var prealertumEntity = Convertir(prealertum);
+            _unidadDeTrabajo.PrealertumDAL.Update(prealertumEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 

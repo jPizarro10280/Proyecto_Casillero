@@ -8,6 +8,6 @@ namespace BackEnd.Services.Interfaces
         void AddDetalleFactura(DetalleFacturaDTO detalleFactura);
         void UpdateDetalleFactura(DetalleFacturaDTO detalleFactura);
         void DeleteDetalleFactura(int id);
-        List <DetalleFactura> GetDetalleFacturas();
+        List <DetalleFacturaDTO> GetDetalleFacturas();
     }
 }

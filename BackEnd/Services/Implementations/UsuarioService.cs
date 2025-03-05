@@ -14,9 +14,9 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddUsuario(UsuarioDTO usuario)
+        Usuario Convertir(UsuarioDTO usuario)
         {
-            var usuarioEntity = new Usuario()
+            return new Usuario()
             {
                 Id = usuario.Id,
                 Nombre = usuario.Nombre,
@@ -24,13 +24,19 @@ namespace BackEnd.Services.Implementations
                 Contrasena = usuario.Contrasena,
                 Telefono = usuario.Telefono
             };
+        }
+
+        public void AddUsuario(UsuarioDTO usuario)
+        {
+            var usuarioEntity = Convertir(usuario);            
             _unidadDeTrabajo.UsuarioDAL.Add(usuarioEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeleteUsuario(int id)
         {
-            throw new NotImplementedException();
+            var usuario = new Usuario { Id = id };
+            _unidadDeTrabajo.UsuarioDAL.Remove(usuario);
         }
 
         public List<Usuario> GetUsuarios()
@@ -40,7 +46,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdateUsuario(UsuarioDTO usuario)
         {
-            throw new NotImplementedException();
+            var usuarioEntity = Convertir(usuario);
+            _unidadDeTrabajo.UsuarioDAL.Update(usuarioEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }

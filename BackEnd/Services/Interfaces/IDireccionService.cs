@@ -9,6 +9,6 @@ namespace BackEnd.Services.Interfaces
         public void AddDireccion(DireccionDTO direccion);
         public void UpdateDireccion(DireccionDTO direccion);
         public void DeleteDireccion(int id);
-        public List<Direccion> GetDirecciones();
+        public List<DireccionDTO> GetDirecciones();
     }
 }

@@ -8,6 +8,6 @@ namespace BackEnd.Services.Interfaces
         void AddPaquete(PaqueteDTO paquete);
         void UpdatePaquete(PaqueteDTO paquete);
         void DeletePaquete(int id);
-        List<Paquete> GetPaquetes();
+        List<PaqueteDTO> GetPaquetes();
     }
 }

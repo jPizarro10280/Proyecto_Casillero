@@ -8,6 +8,6 @@ namespace BackEnd.Services.Interfaces
         void AddPrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete);
         void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete);
         void DeletePrealertaPaquete(int id);
-        List<PrealertaPaquete> GetPrealertaPaquetes();
+        List<PrealertaPaqueteDTO> GetPrealertaPaquetes();
     }
 }

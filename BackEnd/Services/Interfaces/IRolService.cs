@@ -8,6 +8,6 @@ namespace BackEnd.Services.Interfaces
         void AddRol(RolDTO rol);
         void UpdateRol(RolDTO rol);
         void DeleteRol(int id);
-        List<Rol> GetRoles();
+        List<RolDTO> GetRoles();
     }
 }

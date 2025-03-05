@@ -14,20 +14,26 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
+        PrealertaPaquete Convertir(PrealertaPaqueteDTO prealertaPaquete)
+        {
+            return new PrealertaPaquete()
+            {
+                PrealertaId = prealertaPaquete.PrealertaId,
+                PaqueteId = prealertaPaquete.PaqueteId
+            };
+        }
+
         public void AddPrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
         {
-            var prealertaPaqueteEntity = new PrealertaPaquete()
-            {
-                PrealertaId=prealertaPaquete.PrealertaId,
-                PaqueteId=prealertaPaquete.PaqueteId
-            };
+            var prealertaPaqueteEntity = Convertir(prealertaPaquete);            
             _unidadDeTrabajo.PrealertaPaqueteDAL.Add(prealertaPaqueteEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeletePrealertaPaquete(int id)
         {
-            throw new NotImplementedException();
+            var prealertaPaquete = new PrealertaPaquete { Id = id };
+            _unidadDeTrabajo.PrealertaPaqueteDAL.Remove(prealertaPaquete);
         }
 
         public List<PrealertaPaquete> GetPrealertaPaquetes()
@@ -37,7 +43,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdatePrealertaPaquete(PrealertaPaqueteDTO prealertaPaquete)
         {
-            throw new NotImplementedException();
+            var prealertaPaqueteEntity = Convertir(prealertaPaquete);
+            _unidadDeTrabajo.PrealertaPaqueteDAL.Update(prealertaPaqueteEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }

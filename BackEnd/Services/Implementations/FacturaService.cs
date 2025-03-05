@@ -14,9 +14,9 @@ namespace BackEnd.Services.Implementations
             _unidadDeTrabajo = unidadDeTrabajo;
         }
 
-        public void AddFactura(FacturaDTO factura)
+        Factura Convertir(FacturaDTO factura)
         {
-            var facturaEntity = new Factura()
+            return new Factura()
             {
                 UsuarioId = factura.UsuarioId,
                 PaqueteId = factura.PaqueteId,
@@ -25,13 +25,19 @@ namespace BackEnd.Services.Implementations
                 Impuestos = factura.Impuestos,
                 Estado = factura.Estado
             };
+        }
+
+        public void AddFactura(FacturaDTO factura)
+        {
+            var facturaEntity = Convertir(factura);
             _unidadDeTrabajo.FacturaDAL.Add(facturaEntity);
             _unidadDeTrabajo.Complete();
         }
 
         public void DeleteFactura(int id)
         {
-            throw new NotImplementedException();
+            var factura = new Factura { Id = id };
+            _unidadDeTrabajo.FacturaDAL.Remove(factura);
         }
 
         public List<Factura> GetFacturas()
@@ -41,7 +47,9 @@ namespace BackEnd.Services.Implementations
 
         public void UpdateFactura(FacturaDTO factura)
         {
-            throw new NotImplementedException();
+            var facturaEntity = Convertir(factura);
+            _unidadDeTrabajo.FacturaDAL.Update(facturaEntity);
+            _unidadDeTrabajo.Complete();
         }
     }
 }
