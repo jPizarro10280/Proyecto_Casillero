@@ -2,6 +2,7 @@
 {
     public class DireccionDTO
     {
+        public int Id { get; set; }
         public int UsuarioId { get; set; }
 
         public string Linea1 { get; set; } = null!;

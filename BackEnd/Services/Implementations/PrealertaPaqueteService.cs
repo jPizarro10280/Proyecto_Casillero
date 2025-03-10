@@ -18,6 +18,7 @@ namespace BackEnd.Services.Implementations
         {
             return new PrealertaPaquete()
             {
+                Id=prealertaPaquete.Id,
                 PrealertaId = prealertaPaquete.PrealertaId,
                 PaqueteId = prealertaPaquete.PaqueteId
             };
@@ -26,6 +27,7 @@ namespace BackEnd.Services.Implementations
         {
             return new PrealertaPaqueteDTO()
             {
+                Id = prealertaPaquete.Id,
                 PrealertaId = prealertaPaquete.PrealertaId,
                 PaqueteId = prealertaPaquete.PaqueteId
             };

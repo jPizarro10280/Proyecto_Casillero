@@ -18,6 +18,7 @@ namespace BackEnd.Services.Implementations
         {
             return new UsuarioRol()
             {
+                Id = usuarioRol.Id,
                 RolId = usuarioRol.RolId,
                 UsuarioId = usuarioRol.UsuarioId
             };
@@ -26,6 +27,7 @@ namespace BackEnd.Services.Implementations
         {
             return new UsuarioRolDTO()
             {
+                Id = usuarioRol.Id,
                 RolId = usuarioRol.RolId,
                 UsuarioId = usuarioRol.UsuarioId
             };

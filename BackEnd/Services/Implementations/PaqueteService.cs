@@ -17,7 +17,8 @@ namespace BackEnd.Services.Implementations
         Paquete Convertir(PaqueteDTO paquete)
         {
             return new Paquete()
-            {
+            {   
+                Id=paquete.Id,
                 UsuarioId = paquete.UsuarioId,
                 FechaCreacion = paquete.FechaCreacion,
                 Estado = paquete.Estado,
@@ -28,6 +29,7 @@ namespace BackEnd.Services.Implementations
         {
             return new PaqueteDTO()
             {
+                Id = paquete.Id,
                 UsuarioId = paquete.UsuarioId,
                 FechaCreacion = paquete.FechaCreacion,
                 Estado = paquete.Estado,

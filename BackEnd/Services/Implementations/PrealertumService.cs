@@ -18,6 +18,7 @@ namespace BackEnd.Services.Implementations
         {
             return new Prealertum()
             {
+                Id=prealertum.Id,
                 UsuarioId = prealertum.UsuarioId,
                 NumeroSeguimiento = prealertum.NumeroSeguimiento,
                 Descripcion = prealertum.Descripcion,
@@ -31,6 +32,7 @@ namespace BackEnd.Services.Implementations
         {
             return new PrealertumDTO()
             {
+                Id = prealertum.Id,
                 UsuarioId = prealertum.UsuarioId,
                 NumeroSeguimiento = prealertum.NumeroSeguimiento,
                 Descripcion = prealertum.Descripcion,

@@ -2,6 +2,7 @@
 {
     public class DetalleFacturaDTO
     {
+        public int Id { get; set; }
         public int FacturaId { get; set; }
 
         public string Concepto { get; set; } = null!;

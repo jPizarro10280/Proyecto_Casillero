@@ -18,6 +18,7 @@ namespace BackEnd.Services.Implementations
         {
             return new Factura()
             {
+                Id = factura.Id,
                 UsuarioId = factura.UsuarioId,
                 PaqueteId = factura.PaqueteId,
                 FechaEmision = factura.FechaEmision,
@@ -30,6 +31,7 @@ namespace BackEnd.Services.Implementations
         {
             return new FacturaDTO()
             {
+                Id = factura.Id,
                 UsuarioId = factura.UsuarioId,
                 PaqueteId = factura.PaqueteId,
                 FechaEmision = factura.FechaEmision,

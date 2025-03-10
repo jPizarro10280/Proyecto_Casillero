@@ -2,6 +2,7 @@
 {
     public class FacturaDTO
     {
+        public int Id { get; set; }
         public int UsuarioId { get; set; }
         public int PaqueteId { get; set; }
         public DateTime FechaEmision { get; set; }

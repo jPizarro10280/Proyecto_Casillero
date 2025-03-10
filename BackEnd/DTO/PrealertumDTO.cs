@@ -2,6 +2,7 @@
 {
     public class PrealertumDTO
     {
+        public int Id { get; set; }
         public int UsuarioId { get; set; }
 
         public string NumeroSeguimiento { get; set; } = null!;

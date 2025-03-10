@@ -19,6 +19,7 @@ namespace BackEnd.Services.Implementations
         {
             return new Direccion()
             {
+                Id=direccion.Id,
                 UsuarioId = direccion.UsuarioId,
                 Linea1 = direccion.Linea1,
                 Linea2 = direccion.Linea2,
@@ -32,6 +33,7 @@ namespace BackEnd.Services.Implementations
         {
             return new DireccionDTO()
             {
+                Id = direccion.Id,
                 UsuarioId = direccion.UsuarioId,
                 Linea1 = direccion.Linea1,
                 Linea2 = direccion.Linea2,

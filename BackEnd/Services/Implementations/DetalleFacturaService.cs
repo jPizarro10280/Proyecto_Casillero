@@ -17,7 +17,8 @@ namespace BackEnd.Services.Implementations
         DetalleFactura Convertir(DetalleFacturaDTO detalleFactura)
         {
             return new DetalleFactura()
-            {
+            {   
+                Id=detalleFactura.Id,
                 FacturaId = detalleFactura.FacturaId,
                 Concepto = detalleFactura.Concepto,
                 Cantidad = detalleFactura.Cantidad,
@@ -30,6 +31,7 @@ namespace BackEnd.Services.Implementations
         {
             return new DetalleFacturaDTO()
             {
+                Id = detalleFactura.Id,
                 FacturaId = detalleFactura.FacturaId,
                 Concepto = detalleFactura.Concepto,
                 Cantidad = detalleFactura.Cantidad,
