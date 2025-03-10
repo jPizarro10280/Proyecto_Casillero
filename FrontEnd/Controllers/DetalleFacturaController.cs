@@ -1,4 +1,5 @@
 ﻿using FrontEnd.Helpers.Interfaces;
+using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,15 @@ namespace FrontEnd.Controllers
         // GET: DetalleFacturaController
         public ActionResult Index()
         {
-            var result = _detalleFacturaHelper.GetDetalleFacturas();
+            var result = _detalleFacturaHelper.Get();
             return View(result);
         }
 
         // GET: DetalleFacturaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result = _detalleFacturaHelper.GetByID(id);
+            return View(result);
         }
 
         // GET: DetalleFacturaController/Create
@@ -33,10 +35,11 @@ namespace FrontEnd.Controllers
         // POST: DetalleFacturaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DetalleFacturaViewModel detalleFactura)
         {
             try
             {
+                _detalleFacturaHelper.Add(detalleFactura);
                 return RedirectToAction(nameof(Index));
             }
             catch

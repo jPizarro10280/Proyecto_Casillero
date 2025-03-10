@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IDetalleFacturaHelper
     {
-        void AddDetalleFactura(DetalleFacturaViewModel detalleFactura);
-        void UpdateDetalleFactura(DetalleFacturaViewModel detalleFactura);
-        void DeleteDetalleFactura(int id);
-        List<DetalleFacturaViewModel> GetDetalleFacturas();
-        DetalleFacturaViewModel GetDetalleFacturaByID(int id);
+        void Add(DetalleFacturaViewModel detalleFactura);
+        void Update(DetalleFacturaViewModel detalleFactura);
+        void Delete(int id);
+        List<DetalleFacturaViewModel> Get();
+        DetalleFacturaViewModel GetByID(int id);
     }
 }

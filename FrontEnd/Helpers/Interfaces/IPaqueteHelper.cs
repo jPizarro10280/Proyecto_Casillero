@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IPaqueteHelper
     {
-        void AddPaquete(PaqueteViewModel paquete);
-        void UpdatePaquete(PaqueteViewModel paquete);
-        void DeletePaquete(int id);
-        List<PaqueteViewModel> GetPaquetes();
-        PaqueteViewModel GetPaqueteByID(int id);
+        void Add(PaqueteViewModel paquete);
+        void Update(PaqueteViewModel paquete);
+        void Delete(int id);
+        List<PaqueteViewModel> Get();
+        PaqueteViewModel GetByID(int id);
     }
 }

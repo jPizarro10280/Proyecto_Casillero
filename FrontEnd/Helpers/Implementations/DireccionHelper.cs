@@ -1,33 +1,62 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class DireccionHelper : IDireccionHelper
     {
-        public void AddDireccion(DireccionViewModel direccion)
+        IServiceRepository _serviceRepository;
+
+        public DireccionHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeleteDireccion(int id)
+        DireccionViewModel Convertir(DireccionAPI direccion)
         {
-            throw new NotImplementedException();
+            return new DireccionViewModel()
+            {
+                Id = direccion.Id,
+                UsuarioId = direccion.UsuarioId,
+                Linea1 = direccion.Linea1,
+                Linea2 = direccion.Linea2,
+                Ciudad = direccion.Ciudad,
+                Estado = direccion.Estado,
+                CodigoPostal = direccion.CodigoPostal,
+                Pais = direccion.Pais
+            };
         }
 
-        public DireccionViewModel GetDireccionByID(int id)
+        public void Add(DireccionViewModel direccion)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/Direccion", direccion);
         }
 
-        public List<DireccionViewModel> GetDirecciones()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/Direccion/" + id);
         }
 
-        public void UpdateDireccion(DireccionViewModel direccion)
+        public List<DireccionViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/Direccion");
+            var direcciones = JsonConvert.DeserializeObject<List<DireccionAPI>>(response.Content.ReadAsStringAsync().Result);
+            return direcciones.Select(Convertir).ToList();
+        }
+
+        public DireccionViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/Direccion/" + id);
+            var direccion = JsonConvert.DeserializeObject<DireccionAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(direccion);
+        }
+
+        public void Update(DireccionViewModel direccion)
+        {
+            _serviceRepository.PutResponse("api/Direccion", direccion);
         }
     }
+
 }

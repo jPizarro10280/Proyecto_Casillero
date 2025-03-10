@@ -24,22 +24,35 @@ namespace FrontEnd.Helpers.Implementations
         {
             _serviceRepository = serviceRepository;
         }
-        public void AddUsuario(UsuarioViewModel usuario)
+        public void Add(UsuarioViewModel usuario)
+        {
+            HttpResponseMessage responseMessage = _serviceRepository.PostResponse("api/Usuario", usuario);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+            }
+        }
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUsuario(int id)
+        public UsuarioViewModel GetByID(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Usuario/"+id.ToString());
+            UsuarioAPI usuario = new UsuarioAPI();
+            if (responseMessage != null)
+            {
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                usuario = JsonConvert.DeserializeObject<UsuarioAPI>(content);
+            }
+            UsuarioViewModel resultado = Convertir(usuario);
+            
+            return resultado;
         }
 
-        public UsuarioViewModel GetUsuarioByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<UsuarioViewModel> GetUsuarios()
+        public List<UsuarioViewModel> Get()
         {
             HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Usuario");
             List<UsuarioAPI> usuarios = new List<UsuarioAPI>();
@@ -56,7 +69,7 @@ namespace FrontEnd.Helpers.Implementations
             return lista;
         }
 
-        public void UpdateUsuario(UsuarioViewModel usuario)
+        public void Update(UsuarioViewModel usuario)
         {
             throw new NotImplementedException();
         }

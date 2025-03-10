@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IPrealertaPaqueteHelper
     {
-        void AddPrealertaPaquete(PrealertaPaqueteViewModel prealertaPaquete);
-        void UpdatePrealertaPaquete(PrealertaPaqueteViewModel prealertaPaquete);
-        void DeletePrealertaPaquete(int id);
-        List<PrealertaPaqueteViewModel> GetPrealertaPaquetes();
-        PrealertaPaqueteViewModel GetPrealertaPaqueteByID(int id);
+        void Add(PrealertaPaqueteViewModel prealertaPaquete);
+        void Update(PrealertaPaqueteViewModel prealertaPaquete);
+        void Delete(int id);
+        List<PrealertaPaqueteViewModel> Get();
+        PrealertaPaqueteViewModel GetByID(int id);
     }
 }

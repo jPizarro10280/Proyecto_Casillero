@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IRolHelper
     {
-        void AddRol(RolViewModel rol);
-        void UpdateRol(RolViewModel rol);
-        void DeleteRol(int id);
-        List<RolViewModel> GetRoles();
-        RolViewModel GetRolByID(int id);
+        void Add(RolViewModel rol);
+        void Update(RolViewModel rol);
+        void Delete(int id);
+        List<RolViewModel> Get();
+        RolViewModel GetByID(int id);
     }
 }

@@ -1,33 +1,57 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class UsuarioRolHelper : IUsuarioRolHelper
     {
-        public void AddUsuarioRol(UsuarioRolViewModel usuarioRol)
+        private readonly IServiceRepository _serviceRepository;
+
+        public UsuarioRolHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeleteUsuarioRol(int id)
+        private UsuarioRolViewModel Convertir(UsuarioRolAPI usuarioRol)
         {
-            throw new NotImplementedException();
+            return new UsuarioRolViewModel()
+            {
+                Id = usuarioRol.Id,
+                UsuarioId = usuarioRol.UsuarioId,
+                RolId = usuarioRol.RolId
+            };
         }
 
-        public UsuarioRolViewModel GetUsuarioRolByID(int id)
+        public void Add(UsuarioRolViewModel usuarioRol)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/UsuarioRol", usuarioRol);
         }
 
-        public List<UsuarioRolViewModel> GetUsuarioRoles()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/UsuarioRol/" + id);
         }
 
-        public void UpdateUsuarioRol(UsuarioRolViewModel usuarioRol)
+        public List<UsuarioRolViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/UsuarioRol");
+            var usuarioRoles = JsonConvert.DeserializeObject<List<UsuarioRolAPI>>(response.Content.ReadAsStringAsync().Result);
+            return usuarioRoles.Select(Convertir).ToList();
+        }
+
+        public UsuarioRolViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/UsuarioRol/" + id);
+            var usuarioRol = JsonConvert.DeserializeObject<UsuarioRolAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(usuarioRol);
+        }
+
+        public void Update(UsuarioRolViewModel usuarioRol)
+        {
+            _serviceRepository.PutResponse("api/UsuarioRol", usuarioRol);
         }
     }
+
 }

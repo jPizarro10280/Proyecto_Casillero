@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IPrealertumHelper
     {
-        void AddPrealertum(PrealertumViewModel prealertum);
-        void UpdatePrealertum(PrealertumViewModel prealertum);
-        void DeletePrealertum(int id);
-        List<PrealertumViewModel> GetPrealertas();
-        PrealertumViewModel GetPrealertumByID(int id);
+        void Add(PrealertumViewModel prealertum);
+        void Update(PrealertumViewModel prealertum);
+        void Delete(int id);
+        List<PrealertumViewModel> Get();
+        PrealertumViewModel GetByID(int id);
     }
 }

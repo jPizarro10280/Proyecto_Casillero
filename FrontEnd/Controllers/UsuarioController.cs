@@ -1,4 +1,5 @@
 ﻿using FrontEnd.Helpers.Interfaces;
+using FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,15 @@ namespace FrontEnd.Controllers
         // GET: UsuarioController
         public ActionResult Index()
         {
-            var result = _usuarioHelper.GetUsuarios();
+            var result = _usuarioHelper.Get();
             return View(result);
         }
 
         // GET: UsuarioController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result = _usuarioHelper.GetByID(id);
+            return View(result);
         }
 
         // GET: UsuarioController/Create
@@ -33,10 +35,11 @@ namespace FrontEnd.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UsuarioViewModel usuario)
         {
             try
             {
+                _usuarioHelper.Add(usuario);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -1,33 +1,56 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class RolHelper : IRolHelper
     {
-        public void AddRol(RolViewModel rol)
+        private readonly IServiceRepository _serviceRepository;
+
+        public RolHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeleteRol(int id)
+        private RolViewModel Convertir(RolAPI rol)
         {
-            throw new NotImplementedException();
+            return new RolViewModel()
+            {
+                Id = rol.Id,
+                Nombre = rol.Nombre
+            };
         }
 
-        public RolViewModel GetRolByID(int id)
+        public void Add(RolViewModel rol)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/Rol", rol);
         }
 
-        public List<RolViewModel> GetRoles()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/Rol/" + id);
         }
 
-        public void UpdateRol(RolViewModel rol)
+        public List<RolViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/Rol");
+            var roles = JsonConvert.DeserializeObject<List<RolAPI>>(response.Content.ReadAsStringAsync().Result);
+            return roles.Select(Convertir).ToList();
+        }
+
+        public RolViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/Rol/" + id);
+            var rol = JsonConvert.DeserializeObject<RolAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(rol);
+        }
+
+        public void Update(RolViewModel rol)
+        {
+            _serviceRepository.PutResponse("api/Rol", rol);
         }
     }
+
 }

@@ -1,33 +1,56 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class PrealertaPaqueteHelper : IPrealertaPaqueteHelper
     {
-        public void AddPrealertaPaquete(PrealertaPaqueteViewModel prealertaPaquete)
+        private readonly IServiceRepository _serviceRepository;
+
+        public PrealertaPaqueteHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeletePrealertaPaquete(int id)
+        private PrealertaPaqueteViewModel Convertir(PrealertaPaqueteAPI prealertaPaquete)
         {
-            throw new NotImplementedException();
+            return new PrealertaPaqueteViewModel()
+            {
+                Id = prealertaPaquete.Id,
+                PrealertaId = prealertaPaquete.PrealertaId,
+                PaqueteId = prealertaPaquete.PaqueteId
+            };
         }
 
-        public PrealertaPaqueteViewModel GetPrealertaPaqueteByID(int id)
+        public void Add(PrealertaPaqueteViewModel prealertaPaquete)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/PrealertaPaquete", prealertaPaquete);
         }
 
-        public List<PrealertaPaqueteViewModel> GetPrealertaPaquetes()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/PrealertaPaquete/" + id);
         }
 
-        public void UpdatePrealertaPaquete(PrealertaPaqueteViewModel prealertaPaquete)
+        public List<PrealertaPaqueteViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/PrealertaPaquete");
+            var prealertaPaquetes = JsonConvert.DeserializeObject<List<PrealertaPaqueteAPI>>(response.Content.ReadAsStringAsync().Result);
+            return prealertaPaquetes.Select(Convertir).ToList();
+        }
+
+        public PrealertaPaqueteViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/PrealertaPaquete/" + id);
+            var prealertaPaquete = JsonConvert.DeserializeObject<PrealertaPaqueteAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(prealertaPaquete);
+        }
+
+        public void Update(PrealertaPaqueteViewModel prealertaPaquete)
+        {
+            _serviceRepository.PutResponse("api/PrealertaPaquete", prealertaPaquete);
         }
     }
 }

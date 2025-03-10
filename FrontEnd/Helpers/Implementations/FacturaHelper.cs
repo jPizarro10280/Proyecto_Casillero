@@ -1,33 +1,60 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class FacturaHelper : IFacturaHelper
     {
-        public void AddFactura(FacturaViewModel factura)
+        private readonly IServiceRepository _serviceRepository;
+
+        public FacturaHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeleteFactura(int id)
+        private FacturaViewModel Convertir(FacturaAPI factura)
         {
-            throw new NotImplementedException();
+            return new FacturaViewModel()
+            {
+                Id = factura.Id,
+                UsuarioId = factura.UsuarioId,
+                PaqueteId = factura.PaqueteId,
+                FechaEmision = factura.FechaEmision,
+                MontoTotal = factura.MontoTotal,
+                Impuestos = factura.Impuestos,
+                Estado = factura.Estado
+            };
         }
 
-        public FacturaViewModel GetFacturaByID(int id)
+        public void Add(FacturaViewModel factura)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/Factura", factura);
         }
 
-        public List<FacturaViewModel> GetFacturas()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/Factura/" + id);
         }
 
-        public void UpdateFactura(FacturaViewModel factura)
+        public List<FacturaViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/Factura");
+            var facturas = JsonConvert.DeserializeObject<List<FacturaAPI>>(response.Content.ReadAsStringAsync().Result);
+            return facturas.Select(Convertir).ToList();
+        }
+
+        public FacturaViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/Factura/" + id);
+            var factura = JsonConvert.DeserializeObject<FacturaAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(factura);
+        }
+
+        public void Update(FacturaViewModel factura)
+        {
+            _serviceRepository.PutResponse("api/Factura", factura);
         }
     }
 }

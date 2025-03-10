@@ -1,33 +1,59 @@
-﻿using FrontEnd.Helpers.Interfaces;
+﻿using FrontEnd.ApiModels;
+using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Helpers.Implementations
 {
     public class PaqueteHelper : IPaqueteHelper
     {
-        public void AddPaquete(PaqueteViewModel paquete)
+        private readonly IServiceRepository _serviceRepository;
+
+        public PaqueteHelper(IServiceRepository serviceRepository)
         {
-            throw new NotImplementedException();
+            _serviceRepository = serviceRepository;
         }
 
-        public void DeletePaquete(int id)
+        private PaqueteViewModel Convertir(PaqueteAPI paquete)
         {
-            throw new NotImplementedException();
+            return new PaqueteViewModel()
+            {
+                Id = paquete.Id,
+                UsuarioId = paquete.UsuarioId,
+                FechaCreacion = paquete.FechaCreacion,
+                Estado = paquete.Estado,
+                MontoTotal = paquete.MontoTotal
+            };
         }
 
-        public PaqueteViewModel GetPaqueteByID(int id)
+        public void Add(PaqueteViewModel paquete)
         {
-            throw new NotImplementedException();
+            _serviceRepository.PostResponse("api/Paquete", paquete);
         }
 
-        public List<PaqueteViewModel> GetPaquetes()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _serviceRepository.DeleteResponse("api/Paquete/" + id);
         }
 
-        public void UpdatePaquete(PaqueteViewModel paquete)
+        public List<PaqueteViewModel> Get()
         {
-            throw new NotImplementedException();
+            var response = _serviceRepository.GetResponse("api/Paquete");
+            var paquetes = JsonConvert.DeserializeObject<List<PaqueteAPI>>(response.Content.ReadAsStringAsync().Result);
+            return paquetes.Select(Convertir).ToList();
+        }
+
+        public PaqueteViewModel GetByID(int id)
+        {
+            var response = _serviceRepository.GetResponse("api/Paquete/" + id);
+            var paquete = JsonConvert.DeserializeObject<PaqueteAPI>(response.Content.ReadAsStringAsync().Result);
+            return Convertir(paquete);
+        }
+
+        public void Update(PaqueteViewModel paquete)
+        {
+            _serviceRepository.PutResponse("api/Paquete", paquete);
         }
     }
+
 }

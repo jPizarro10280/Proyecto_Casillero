@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IFacturaHelper
     {
-        void AddFactura(FacturaViewModel factura);
-        void UpdateFactura(FacturaViewModel factura);
-        void DeleteFactura(int id);
-        List<FacturaViewModel> GetFacturas();
-        FacturaViewModel GetFacturaByID(int id);
+        void Add(FacturaViewModel factura);
+        void Update(FacturaViewModel factura);
+        void Delete(int id);
+        List<FacturaViewModel> Get();
+        FacturaViewModel GetByID(int id);
     }
 }

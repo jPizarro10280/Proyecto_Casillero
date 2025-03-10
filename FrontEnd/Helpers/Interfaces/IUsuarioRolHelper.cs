@@ -4,10 +4,10 @@ namespace FrontEnd.Helpers.Interfaces
 {
     public interface IUsuarioRolHelper
     {
-        void AddUsuarioRol(UsuarioRolViewModel usuarioRol);
-        void UpdateUsuarioRol(UsuarioRolViewModel usuarioRol);
-        void DeleteUsuarioRol(int id);
-        List<UsuarioRolViewModel> GetUsuarioRoles();
-        UsuarioRolViewModel GetUsuarioRolByID(int id);
+        void Add(UsuarioRolViewModel usuarioRol);
+        void Update(UsuarioRolViewModel usuarioRol);
+        void Delete(int id);
+        List<UsuarioRolViewModel> Get();
+        UsuarioRolViewModel GetByID(int id);
     }
 }
