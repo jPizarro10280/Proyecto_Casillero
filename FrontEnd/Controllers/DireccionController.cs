@@ -1,22 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FrontEnd.Helpers.Interfaces;
+using FrontEnd.Models;
 
 namespace FrontEnd.Controllers
 {
     public class DireccionController : Controller
     {
+        IDireccionHelper _direccionHelper;
+        
+        public DireccionController (IDireccionHelper direccionHelper)
+        {
+            _direccionHelper = direccionHelper;
+        }
+
         // GET: DireccionController
         public ActionResult Index()
         {
-            return View();
+            var result = _direccionHelper.GetDir();
+            return View(result);
         }
 
         // GET: DireccionController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result = _direccionHelper.GetByID(id);
+            return View(result);
         }
-
         // GET: DireccionController/Create
         public ActionResult Create()
         {
@@ -26,10 +36,11 @@ namespace FrontEnd.Controllers
         // POST: DireccionController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DireccionViewModel direccion)
         {
             try
             {
+                _direccionHelper.Add(direccion);
                 return RedirectToAction(nameof(Index));
             }
             catch

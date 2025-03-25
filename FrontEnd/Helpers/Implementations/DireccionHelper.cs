@@ -29,9 +29,14 @@ namespace FrontEnd.Helpers.Implementations
             };
         }
 
-        public void Add(DireccionViewModel direccion)
+        public DireccionViewModel Add(DireccionViewModel direccion)
         {
-            _serviceRepository.PostResponse("api/Direccion", direccion);
+            HttpResponseMessage response= _serviceRepository.PostResponse("api/Direccion", direccion);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+            }
+            return direccion;
         }
 
         public void Delete(int id)
@@ -39,23 +44,39 @@ namespace FrontEnd.Helpers.Implementations
             _serviceRepository.DeleteResponse("api/Direccion/" + id);
         }
 
-        public List<DireccionViewModel> Get()
+        public List<DireccionViewModel> GetDir()
         {
-            var response = _serviceRepository.GetResponse("api/Direccion");
-            var direcciones = JsonConvert.DeserializeObject<List<DireccionAPI>>(response.Content.ReadAsStringAsync().Result);
-            return direcciones.Select(Convertir).ToList();
+            HttpResponseMessage response = _serviceRepository.GetResponse("api/Direccion");
+            List<DireccionAPI> direcciones = new List<DireccionAPI>();
+            if (response != null)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                direcciones = JsonConvert.DeserializeObject<List<DireccionAPI>>(content);
+            }
+            List<DireccionViewModel>list = new List<DireccionViewModel>();
+            foreach(var direccion in direcciones)
+            {
+                list.Add(Convertir(direccion));
+            }
+            return list;
         }
 
-        public DireccionViewModel GetByID(int id)
+        public DireccionViewModel GetByID(int? id)
         {
-            var response = _serviceRepository.GetResponse("api/Direccion/" + id);
-            var direccion = JsonConvert.DeserializeObject<DireccionAPI>(response.Content.ReadAsStringAsync().Result);
-            return Convertir(direccion);
+            HttpResponseMessage response = _serviceRepository.GetResponse("api/Direccion/" + id.ToString());
+            DireccionAPI direccion = new DireccionAPI();
+            if (response != null)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                direccion = JsonConvert.DeserializeObject<DireccionAPI>(content);
+            }
+            DireccionViewModel result = Convertir(direccion);
+            return result;
         }
 
-        public void Update(DireccionViewModel direccion)
+        public DireccionViewModel Update(DireccionViewModel direccion)
         {
-            _serviceRepository.PutResponse("api/Direccion", direccion);
+            throw new NotImplementedException();
         }
     }
 
