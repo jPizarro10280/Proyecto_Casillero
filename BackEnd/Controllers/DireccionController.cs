@@ -1,25 +1,31 @@
 ﻿using BackEnd.DTO;
 using BackEnd.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class DireccionController : ControllerBase
     {
         IDireccionService _direccionService;
+        ILogger<DireccionController> _logger;
 
-        public DireccionController(IDireccionService direccionService)
+        public DireccionController(IDireccionService direccionService, ILogger<DireccionController> logger)
         {
             _direccionService = direccionService;
+            _logger = logger;
         }
 
         // GET: api/<DireccionController>
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public IEnumerable<DireccionDTO> Get()
         {
+            _logger.LogDebug("Obtener direcciones registradas");
             return _direccionService.GetDirecciones();
         }
 
@@ -41,7 +47,14 @@ namespace BackEnd.Controllers
         [HttpPut]
         public void Put([FromBody] DireccionDTO direccion)
         {
-            _direccionService.UpdateDireccion(direccion);
+            try
+            {
+                _direccionService.UpdateDireccion(direccion);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
         // DELETE api/<DireccionController>/5
