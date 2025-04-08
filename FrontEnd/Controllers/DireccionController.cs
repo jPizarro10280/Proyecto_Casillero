@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.Controllers
 {
+    [Authorize]
     public class DireccionController : Controller
     {
         IDireccionHelper _direccionHelper;
