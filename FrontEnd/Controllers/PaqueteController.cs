@@ -7,41 +7,41 @@ using Microsoft.AspNetCore.Mvc;
 namespace FrontEnd.Controllers
 {
     [Authorize]
-    public class UsuarioController : Controller
+    public class PaqueteController : Controller
     {
-        IUsuarioHelper _usuarioHelper;
-        public UsuarioController(IUsuarioHelper usuarioHelper)
+        IPaqueteHelper _paqueteHelper;
+        public PaqueteController(IPaqueteHelper paqueteHelper)
         {
-            _usuarioHelper = usuarioHelper;   
+            _paqueteHelper = paqueteHelper;
         }
-        // GET: UsuarioController
+        // GET: PaqueteController
         public ActionResult Index()
         {
-            var result = _usuarioHelper.Get();
+            var result = _paqueteHelper.Get();
             return View(result);
         }
 
-        // GET: UsuarioController/Details/5
+        // GET: PaqueteController/Details/5
         public ActionResult Details(int id)
         {
-            var result = _usuarioHelper.GetByID(id);
+            var result = _paqueteHelper.GetByID(id);
             return View(result);
         }
 
-        // GET: UsuarioController/Create
+        // GET: PaqueteController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UsuarioController/Create
+        // POST: PaqueteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UsuarioViewModel usuario)
+        public ActionResult Create(PaqueteViewModel paquete)
         {
             try
             {
-                _usuarioHelper.Add(usuario);
+                _paqueteHelper.Add(paquete);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -50,46 +50,36 @@ namespace FrontEnd.Controllers
             }
         }
 
-        // GET: UsuarioController/Edit/5
+        // GET: PaqueteController/Edit/5
         public ActionResult Edit(int id)
         {
-            UsuarioViewModel usuario = _usuarioHelper.GetByID(id);
-
-            return View(usuario);
-
+            PaqueteViewModel paquete = _paqueteHelper.GetByID(id);
+            return View(paquete);
         }
 
-        // POST: UsuarioController/Edit/5
+        // POST: PaqueteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UsuarioViewModel usuario)
+        public ActionResult Edit(PaqueteViewModel paquete)
         {
             try
-
             {
-
-                _usuarioHelper.Update(usuario);
-
-                return RedirectToAction("Details", new { id = usuario.Id });
-
+                _paqueteHelper.Update(paquete);
+                return RedirectToAction("Details", new { id = paquete.Id });
             }
-
             catch
-
             {
-
                 return View();
-
             }
         }
 
-        // GET: UsuarioController/Delete/5
+        // GET: PaqueteController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: UsuarioController/Delete/5
+        // POST: PaqueteController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

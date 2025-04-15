@@ -7,41 +7,41 @@ using Microsoft.AspNetCore.Mvc;
 namespace FrontEnd.Controllers
 {
     [Authorize]
-    public class UsuarioController : Controller
+    public class FacturaController : Controller
     {
-        IUsuarioHelper _usuarioHelper;
-        public UsuarioController(IUsuarioHelper usuarioHelper)
+        IFacturaHelper _facturaHelper;
+        public FacturaController(IFacturaHelper facturaHelper)
         {
-            _usuarioHelper = usuarioHelper;   
+            _facturaHelper = facturaHelper;
         }
-        // GET: UsuarioController
+        // GET: FacturaController
         public ActionResult Index()
         {
-            var result = _usuarioHelper.Get();
+            var result = _facturaHelper.Get();
             return View(result);
         }
 
-        // GET: UsuarioController/Details/5
+        // GET: FacturaController/Details/5
         public ActionResult Details(int id)
         {
-            var result = _usuarioHelper.GetByID(id);
+            var result = _facturaHelper.GetByID(id);
             return View(result);
         }
 
-        // GET: UsuarioController/Create
+        // GET: FacturaController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UsuarioController/Create
+        // POST: FacturaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UsuarioViewModel usuario)
+        public ActionResult Create(FacturaViewModel factura)
         {
             try
             {
-                _usuarioHelper.Add(usuario);
+                _facturaHelper.Add(factura);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -50,46 +50,36 @@ namespace FrontEnd.Controllers
             }
         }
 
-        // GET: UsuarioController/Edit/5
+        // GET: FacturaController/Edit/5
         public ActionResult Edit(int id)
         {
-            UsuarioViewModel usuario = _usuarioHelper.GetByID(id);
-
-            return View(usuario);
-
+            FacturaViewModel factura = _facturaHelper.GetByID(id);
+            return View(factura);
         }
 
-        // POST: UsuarioController/Edit/5
+        // POST: FacturaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UsuarioViewModel usuario)
+        public ActionResult Edit(FacturaViewModel factura)
         {
             try
-
             {
-
-                _usuarioHelper.Update(usuario);
-
-                return RedirectToAction("Details", new { id = usuario.Id });
-
+                _facturaHelper.Update(factura);
+                return RedirectToAction("Details", new { id = factura.Id });
             }
-
             catch
-
             {
-
                 return View();
-
             }
         }
 
-        // GET: UsuarioController/Delete/5
+        // GET: FacturaController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: UsuarioController/Delete/5
+        // POST: FacturaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
