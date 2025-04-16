@@ -37,7 +37,7 @@ namespace FrontEnd.Helpers.Implementations
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage responseMessage = _serviceRepository.DeleteResponse("api/DetalleFactura/" + id.ToString());
         }
 
         public DetalleFacturaViewModel GetByID(int id)
@@ -72,7 +72,7 @@ namespace FrontEnd.Helpers.Implementations
 
         public void Update(DetalleFacturaViewModel detalleFactura)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage responseMessage = _serviceRepository.PutResponse("api/DetalleFactura", detalleFactura);
         }
     }
 }

@@ -55,6 +55,7 @@ namespace BackEnd.Services.Implementations
         {
             var direccion = new Direccion { Id = id };
             _unidadDeTrabajo.DireccionDAL.Remove(direccion);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<DireccionDTO> GetDirecciones()

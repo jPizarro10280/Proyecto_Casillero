@@ -44,6 +44,7 @@ namespace BackEnd.Services.Implementations
         {
             var prealertaPaquete = new PrealertaPaquete { Id = id };
             _unidadDeTrabajo.PrealertaPaqueteDAL.Remove(prealertaPaquete);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<PrealertaPaqueteDTO> GetPrealertaPaquetes()

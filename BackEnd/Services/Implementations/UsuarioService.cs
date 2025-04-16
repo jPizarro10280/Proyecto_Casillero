@@ -48,6 +48,7 @@ namespace BackEnd.Services.Implementations
         {
             var usuario = new Usuario { Id = id };
             _unidadDeTrabajo.UsuarioDAL.Remove(usuario);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<UsuarioDTO> GetUsuarios()

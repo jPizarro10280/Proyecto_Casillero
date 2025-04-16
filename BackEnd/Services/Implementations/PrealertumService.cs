@@ -54,6 +54,7 @@ namespace BackEnd.Services.Implementations
         {
             var prealertum = new Prealertum { Id = id };
             _unidadDeTrabajo.PrealertumDAL.Remove(prealertum);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<PrealertumDTO> GetPrealertums()

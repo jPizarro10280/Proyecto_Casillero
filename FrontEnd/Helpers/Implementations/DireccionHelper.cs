@@ -54,7 +54,10 @@ namespace FrontEnd.Helpers.Implementations
                 direcciones = JsonConvert.DeserializeObject<List<DireccionAPI>>(content);
             }
             List<DireccionViewModel>list = new List<DireccionViewModel>();
-            foreach(var direccion in direcciones)
+            if (direcciones == null) {
+                return list;
+            }
+            foreach (var direccion in direcciones)
             {
                 list.Add(Convertir(direccion));
             }
@@ -76,7 +79,11 @@ namespace FrontEnd.Helpers.Implementations
 
         public DireccionViewModel Update(DireccionViewModel direccion)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = _serviceRepository.PutResponse("api/Direccion", direccion);
+            if (response.IsSuccessStatusCode) {
+                var content = response.Content.ReadAsStringAsync().Result;
+            }
+            return direccion;
         }
     }
 

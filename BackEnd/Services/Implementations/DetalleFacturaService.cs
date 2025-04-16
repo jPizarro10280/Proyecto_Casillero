@@ -51,6 +51,7 @@ namespace BackEnd.Services.Implementations
         {
             var detalleFactura = new DetalleFactura { Id = id };
             _unidadDeTrabajo.DetalleFacturaDAL.Remove(detalleFactura);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<DetalleFacturaDTO> GetDetalleFacturas()

@@ -2,6 +2,7 @@
 using FrontEnd.Helpers.Interfaces;
 using FrontEnd.Models;
 using Newtonsoft.Json;
+using NuGet.Protocol.Core.Types;
 
 namespace FrontEnd.Helpers.Implementations
 {
@@ -28,9 +29,21 @@ namespace FrontEnd.Helpers.Implementations
             };
         }
 
+        FacturaAPI Convertir(FacturaViewModel factura) {
+            return new FacturaAPI() {
+                Id = factura.Id,
+                UsuarioId = factura.UsuarioId,
+                PaqueteId = factura.PaqueteId,
+                FechaEmision = factura.FechaEmision,
+                MontoTotal = factura.MontoTotal,
+                Impuestos = factura.Impuestos,
+                Estado = factura.Estado
+            };
+        }
+
         public void Add(FacturaViewModel factura)
         {
-            _serviceRepository.PostResponse("api/Factura", factura);
+            HttpResponseMessage responseMessage = _serviceRepository.PostResponse("api/Factura", Convertir(factura));
         }
 
         public void Delete(int id)
@@ -47,9 +60,17 @@ namespace FrontEnd.Helpers.Implementations
 
         public FacturaViewModel GetByID(int id)
         {
-            var response = _serviceRepository.GetResponse("api/Factura/" + id);
-            var factura = JsonConvert.DeserializeObject<FacturaAPI>(response.Content.ReadAsStringAsync().Result);
-            return Convertir(factura);
+            FacturaAPI facturaAPI = new FacturaAPI();
+            HttpResponseMessage responseMessage = _serviceRepository.GetResponse("api/Factura/" + id.ToString());
+
+
+            if (responseMessage != null) {
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+                facturaAPI = JsonConvert.DeserializeObject<FacturaAPI>(content);
+
+
+            }
+            return Convertir(facturaAPI);
         }
 
         public void Update(FacturaViewModel factura)

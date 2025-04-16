@@ -54,16 +54,18 @@ namespace FrontEnd.Controllers
         // GET: DireccionController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var result = _direccionHelper.GetByID(id);
+            return View(result);
         }
 
         // POST: DireccionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(DireccionViewModel direccion)
         {
             try
             {
+                _direccionHelper.Update(direccion);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,21 +77,12 @@ namespace FrontEnd.Controllers
         // GET: DireccionController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
 
-        // POST: DireccionController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
+            try {
+                _direccionHelper.Delete(id);
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+            } catch {
+                return RedirectToAction(nameof(Index));
             }
         }
     }

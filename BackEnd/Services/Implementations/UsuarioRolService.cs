@@ -44,6 +44,7 @@ namespace BackEnd.Services.Implementations
         {
             var usuarioRol = new UsuarioRol { Id = id };
             _unidadDeTrabajo.UsuarioRolDAL.Remove(usuarioRol);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<UsuarioRolDTO> GetUsuarioRoles()

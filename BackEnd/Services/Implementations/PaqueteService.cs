@@ -48,6 +48,7 @@ namespace BackEnd.Services.Implementations
         {
             var paquete = new Paquete { Id = id };
             _unidadDeTrabajo.PaqueteDAL.Remove(paquete);
+            _unidadDeTrabajo.Complete();
         }
 
         public List<PaqueteDTO> GetPaquetes()

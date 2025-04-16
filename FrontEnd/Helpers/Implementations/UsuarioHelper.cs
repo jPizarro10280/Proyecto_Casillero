@@ -35,7 +35,10 @@ namespace FrontEnd.Helpers.Implementations
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage responseMessage = _serviceRepository.DeleteResponse("api/Usuario/" + id.ToString());
+            if (responseMessage.IsSuccessStatusCode) {
+                var content = responseMessage.Content.ReadAsStringAsync().Result;
+            }
         }
 
         public UsuarioViewModel GetByID(int id)
@@ -69,9 +72,8 @@ namespace FrontEnd.Helpers.Implementations
             return lista;
         }
 
-        public void Update(UsuarioViewModel usuario)
-        {
-            throw new NotImplementedException();
+        public void Update(UsuarioViewModel usuario) {
+            HttpResponseMessage responseMessage = _serviceRepository.PutResponse("api/Usuario", usuario);
         }
     }
 }

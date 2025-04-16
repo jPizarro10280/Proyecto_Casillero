@@ -7,41 +7,41 @@ using Microsoft.AspNetCore.Mvc;
 namespace FrontEnd.Controllers
 {
     [Authorize]
-    public class DetalleFacturaController : Controller
+    public class PaqueteController : Controller
     {
-        IDetalleFacturaHelper _detalleFacturaHelper;
-        public DetalleFacturaController(IDetalleFacturaHelper detalleFacturaHelper)
+        IPaqueteHelper _paqueteHelper;
+        public PaqueteController(IPaqueteHelper paqueteHelper)
         {
-            _detalleFacturaHelper = detalleFacturaHelper;
+            _paqueteHelper = paqueteHelper;
         }
-        // GET: DetalleFacturaController
+        // GET: PaqueteController
         public ActionResult Index()
         {
-            var result = _detalleFacturaHelper.Get();
+            var result = _paqueteHelper.Get();
             return View(result);
         }
 
-        // GET: DetalleFacturaController/Details/5
+        // GET: PaqueteController/Details/5
         public ActionResult Details(int id)
         {
-            var result = _detalleFacturaHelper.GetByID(id);
+            var result = _paqueteHelper.GetByID(id);
             return View(result);
         }
 
-        // GET: DetalleFacturaController/Create
+        // GET: PaqueteController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DetalleFacturaController/Create
+        // POST: PaqueteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DetalleFacturaViewModel detalleFactura)
+        public ActionResult Create(PaqueteViewModel paquete)
         {
             try
             {
-                _detalleFacturaHelper.Add(detalleFactura);
+                _paqueteHelper.Add(paquete);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -50,22 +50,22 @@ namespace FrontEnd.Controllers
             }
         }
 
-        // GET: DetalleFacturaController/Edit/5
+        // GET: PaqueteController/Edit/5
         public ActionResult Edit(int id)
         {
-            DetalleFacturaViewModel detalleFactura = _detalleFacturaHelper.GetByID(id);
-            return View(detalleFactura);
+            PaqueteViewModel paquete = _paqueteHelper.GetByID(id);
+            return View(paquete);
         }
 
-        // POST: DetalleFacturaController/Edit/5
+        // POST: PaqueteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(DetalleFacturaViewModel detalleFactura)
+        public ActionResult Edit(PaqueteViewModel paquete)
         {
             try
             {
-                _detalleFacturaHelper.Update(detalleFactura);
-                return RedirectToAction(nameof(Index));
+                _paqueteHelper.Update(paquete);
+                return RedirectToAction("Details", new { id = paquete.Id });
             }
             catch
             {
@@ -73,11 +73,11 @@ namespace FrontEnd.Controllers
             }
         }
 
-        // GET: DetalleFacturaController/Delete/5
+        // GET: PaqueteController/Delete/5
         public ActionResult Delete(int id)
         {
             try {
-                _detalleFacturaHelper.Delete(id);
+                _paqueteHelper.Delete(id);
                 return RedirectToAction(nameof(Index));
             } catch {
                 return RedirectToAction(nameof(Index));

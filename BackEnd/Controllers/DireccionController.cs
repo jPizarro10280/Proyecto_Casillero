@@ -8,7 +8,6 @@ namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="Admin")]
     public class DireccionController : ControllerBase
     {
         IDireccionService _direccionService;
@@ -22,7 +21,6 @@ namespace BackEnd.Controllers
 
         // GET: api/<DireccionController>
         [HttpGet]
-        [Authorize(Roles ="Admin")]
         public IEnumerable<DireccionDTO> Get()
         {
             _logger.LogDebug("Obtener direcciones registradas");
